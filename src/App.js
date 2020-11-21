@@ -1,25 +1,56 @@
-import logo from './logo.svg';
 import './App.css';
+import { useEffect, useState } from 'react'
+import Recipe from './Recipe'
+import Header from './Header'
 
-function App() {
+const App = () => {
+  const APP_ID = '17bbfe63'
+  const APP_KEY = 'c27cae5a67a0935d749d196dff127f70'
+
+  const [recipes, setRecipes] = useState([])
+  const [search, setSearch] = useState('')
+  const [query, setQuery] = useState('chicken')
+
+  useEffect(() => {
+    const getRecipes = async () => {
+      const response = await fetch(`https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}`)
+      const data = await response.json()
+      setRecipes(data.hits)
+    }
+    getRecipes()
+  }, [query])
+
+  const updateSearch = e => {
+    setSearch(e.target.value)
+  }
+
+  const getSearch = e => {
+    e.preventDefault()
+    setQuery(search)
+    setSearch('')
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <div className="searchbar">
+        <form onSubmit={getSearch}>
+          <input onChange={updateSearch} type="text" name="recipeName" className="search-field" placeholder="chickpeas, coconut milk..."/>
+          <button type="submit" className="submit-button">Search</button>
+        </form>
+      </div>
+      <div className="list-of-recipes">
+        {recipes.map(recipe => (
+          <Recipe
+            key={recipe.recipe.url}
+            title={recipe.recipe.label}
+            image={recipe.recipe.image}
+            url={recipe.recipe.url}
+          />
+        ))}
+      </div>
     </div>
-  );
+  )
 }
 
 export default App;
