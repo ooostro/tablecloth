@@ -17,28 +17,71 @@ body {
     serif;
 }
 
-#root {
-  max-width: 1200px;
-  margin: 0 auto;
+header {
+  background-size: cover;
+  background-position: center;
+}
+
+.header-wrapper {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  flex-direction: column;
+  margin: 30px;
+  background-size: cover;
+  height: 80vh;
+  background-position: center;
+}
+
+.photo-credit {
+  position: absolute;
+  bottom: 0;
+  right: 2em;
+  font-size: .8em;
+  color: #fff;
+}
+
+.photo-credit a {
+  color: #fff;
+  border-bottom: 1px solid #fff;
+}
+
+.break {
+  display: block;
 }
 
 .logo {
+  position: absolute;
+  top: 2em;
+  left: 2em;
+  color: #fff;
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+
+.logo-main {
+  border-right: 1px solid #fff;
+  padding-right: .6em;
+  margin-right: .6em;
+}
+
+.logo-subtitle {
+  font-size: .8em;
+  font-family: 'Noto Serif TC',
+  serif;
+}
+
+.logo-main,
+.logo-subtitle {
+  font-weight: 100;
 }
 
 h1 {
-  font-size: 1rem;
-  background-color: #FFEAA7;
-  padding: .4em 1em;
-  border-radius: 0 0 3px 3px;
-  margin-top: 0px;
-  letter-spacing: 1px;
-}
-
-h2 {
-  font-family: 'Noto Serif TC', serif;
-  font-size: 2em;
+  font-family: 'IM Fell French Canon',
+  serif;
+  line-height: 1;
+  margin: 0;
 }
 
 h3 {
@@ -62,8 +105,16 @@ a {
 a:hover,
 a:focus {
   background-color: #FFEAA7;
+  color: #000;
   border-color: #FFEAA7;
   outline: 1px #FFEAA7 solid;
+  outline-offset: 0;
+
+}
+
+input:focus {
+  outline: 1px dashed #fff;
+  outline-offset: 4px;
 }
 
 .opening-content {
@@ -71,45 +122,41 @@ a:focus {
   margin: 0 auto;
 }
 
-.searchbar {
-  width: 67%;
-  margin: 1.5em auto 0;
+.lead-in-text {
+  color: #fff;
+  margin: 0 auto 1em;
+  font-weight: 500;
+  font-size: 1.2em;
+}
+
+.search-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .search-field {
   border: none;
-  border-bottom: 2px solid #000;
   font-family: 'IM Fell French Canon', serif;
   color: #000;
   font-style: italic;
   font-size: 1.8rem;
-  width: 79%;
-}
-
-.search-field:focus {
-  outline-color: transparent;
-  outline-style: none;
-  background-color: #FFEAA7;
-  color: #000;
-}
-
-[placeholder]::-webkit-input-placeholder {
-  color: #aaa;
-}
-
-[placeholder]:focus::-webkit-input-placeholder {
-  color: #FFEAA7;
+  width: 50%;
+  background-color: #fff;
+  min-width: 400px;
+  padding: 7px;
+  text-align: center;
 }
 
 .submit-button {
-  font-family: 'Noto Serif TC', serif;
-  background-color: transparent;
-  border-color: #000;
-  margin-left: .5em;
+  font-family: 'Noto Serif TC',
+  serif;
+  background-color: #fff;
+  border: 1px solid #fff;
   font-size: 1.3rem;
-  padding: .1em .5em;
+  padding: .2em 2em;
   cursor: pointer;
-  border-radius: 1px;
+  margin-top: 1em;
 }
 
 .submit-button:hover {
@@ -118,8 +165,8 @@ a:focus {
 }
 
 .submit-button:focus {
-  outline: 1px dashed #000;
-  outline-offset: 3px;
+  outline: 1px dashed #fff;
+  outline-offset: 4px;
 }
 
 .submit-button:active {
@@ -161,4 +208,22 @@ a:focus {
 .recipe-image img {
   display: block;
   width: 100%;
+}
+
+/* mobile */
+
+@media only screen and (max-width: 480px) {
+  .header-wrapper {
+    margin: 15px;
+  }
+
+  .search-field {
+    min-width: 300px;
+  }
+
+  .logo {
+    top: 1em;
+    width: 100%;
+    left: auto;
+  }
 }
