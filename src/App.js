@@ -14,30 +14,25 @@ const App = () => {
   const [bgImage, setBgImage] = useState('')
   const [placeholder, setPlaceholder] = useState('')
 
-  // const bgImage = images[Math.floor(Math.random() * Math.floor(images.length))].src
-
-  // const placeholdersList = ["tuna noodle casserole", "pineapple upside-down cake", "chicken à la king", "ma's meatloaf", "clam dip", "pigs in a blanket", "shrimp cocktail"]
-  // const placeholder = `${placeholdersList[Math.floor(Math.random() * Math.floor(placeholdersList.length))]}...`
-
   useEffect(() => {
     let randomNum = Math.floor(Math.random() * Math.floor(images.length))
     setBgImage(images[randomNum].src)
   }, [])
   
   useEffect(() => {
-    const placeholdersList = ["tuna noodle casserole", "pineapple upside-down cake", "chicken à la king", "ma's meatloaf", "clam dip", "pigs in a blanket", "shrimp cocktail"] 
+    const placeholdersList = ["tuna noodle casserole", "pineapple upside-down cake", "chicken à la king", "ma's meatloaf", "clam dip", "pigs in a blanket", "shrimp cocktail", "clams casino"] 
     let randomNum = Math.floor(Math.random() * Math.floor(placeholdersList.length))
     setPlaceholder(`${placeholdersList[randomNum]}...`)
   }, [])
 
-  // useEffect(() => {
-  //   const getRecipes = async () => {
-  //     const response = await fetch(`https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}`)
-  //     const data = await response.json()
-  //     setRecipes(data.hits)
-  //   }
-  //   getRecipes()
-  // }, [query])
+  useEffect(() => {
+    const getRecipes = async () => {
+      const response = await fetch(`https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}`)
+      const data = await response.json()
+      setRecipes(data.hits)
+    }
+    getRecipes()
+  }, [query])
 
   const updateSearch = e => {
     setSearch(e.target.value)
@@ -65,8 +60,8 @@ const App = () => {
           <Recipe
             key={recipe.recipe.url}
             title={recipe.recipe.label}
-            image={recipe.recipe.image}
             url={recipe.recipe.url}
+            ingredients={recipe.recipe.ingredientLines}
           />
         ))}
       </div>

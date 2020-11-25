@@ -185,7 +185,7 @@ input:focus {
   width: 40%;
   border: 1px solid #000;
   margin: .5em;
-  border-radius: 2px;
+  border-radius: 6px;
   position: relative;
 }
 
@@ -198,16 +198,40 @@ input:focus {
   padding: 1em;
 }
 
-.image-wrapper {
+.ingredients-list {
   width: 100%;
-  overflow: hidden;
-  margin: .2em auto 1em;
-  height: 11em;
+  padding: 0;
+  margin: 0;
+  list-style: none;
 }
 
-.recipe-image img {
-  display: block;
-  width: 100%;
+.ingredients-list li {
+  border-bottom: 1px solid #000;
+  padding: 5px 10px;
+}
+
+.ingredients-list li:first-child {
+  margin-top: 15px;
+}
+
+.read-more {
+  background-color: #FFEAA7;
+  text-align: center;
+  padding: .8em;
+  margin: 1em 2em;
+  cursor: pointer;
+}
+
+.read-more a {
+  border-bottom: none;
+}
+
+/* iPad-ish */
+
+@media only screen and (max-width: 700px) {
+  .recipe-card {
+    width: 90%;
+  }
 }
 
 /* mobile */
