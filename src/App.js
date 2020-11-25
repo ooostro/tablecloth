@@ -2,6 +2,7 @@ import './App.css';
 import { useEffect, useState } from 'react'
 import Recipe from './Recipe'
 import Header from './Header'
+import images from './images'
 
 const App = () => {
   const APP_ID = '17bbfe63'
@@ -9,7 +10,20 @@ const App = () => {
 
   const [recipes, setRecipes] = useState([])
   const [search, setSearch] = useState('')
-  const [query, setQuery] = useState('chicken')
+  const [query, setQuery] = useState('')
+  const [bgImage, setBgImage] = useState('')
+  const [placeholder, setPlaceholder] = useState('')
+
+  useEffect(() => {
+    let randomNum = Math.floor(Math.random() * Math.floor(images.length))
+    setBgImage(images[randomNum].src)
+  }, [])
+  
+  useEffect(() => {
+    const placeholdersList = ["tuna noodle casserole", "pineapple upside-down cake", "chicken à la king", "ma's meatloaf", "clam dip", "pigs in a blanket", "shrimp cocktail", "clams casino"] 
+    let randomNum = Math.floor(Math.random() * Math.floor(placeholdersList.length))
+    setPlaceholder(`${placeholdersList[randomNum]}...`)
+  }, [])
 
   useEffect(() => {
     const getRecipes = async () => {
@@ -32,20 +46,22 @@ const App = () => {
 
   return (
     <div className="App">
-      <Header />
-      <div className="searchbar">
-        <form onSubmit={getSearch}>
-          <input onChange={updateSearch} type="text" name="recipeName" className="search-field" placeholder="chickpeas, coconut milk..."/>
+      <div className="header-wrapper" style={{ backgroundImage: `url(${bgImage})` }}>
+        <Header />
+        <p className="lead-in-text">What's on the menu?</p>
+        <form onSubmit={getSearch} className="search-form">
+          <input onChange={updateSearch} type="text" name="recipeName" className="search-field" placeholder={placeholder}/>
           <button type="submit" className="submit-button">Search</button>
         </form>
+        <p className="photo-credit">Photo by <a href="https://unsplash.com/@anniespratt">Annie Spratt</a></p>
       </div>
       <div className="list-of-recipes">
         {recipes.map(recipe => (
           <Recipe
             key={recipe.recipe.url}
             title={recipe.recipe.label}
-            image={recipe.recipe.image}
             url={recipe.recipe.url}
+            ingredients={recipe.recipe.ingredientLines}
           />
         ))}
       </div>
